@@ -61,12 +61,13 @@
             </div>
             <div class="gallery__filter-card--body">
                 <form class="gallery__filter-card-checkbox">
-                    {% for filter in hubdb_table_column(table_id, filter_group.name).options %}
-                    {% set name = filter.name | replace('/','-') | replace(' ', '-')  %}
-                    <div class="form-check">
-                        <input type="checkbox" id="" name="{{ name }}" value=".{{ name }}" data-filter=".{{ name }}">
-                        <label>{{ filter.name }}</label>
-                    </div>
+                  {% set options = hubdb_table_column(table_id, filter_group.name).options %}
+                    {% for option in options %}
+                      {% set option_name = option.name | replace('/','-') | replace(' ', '-')  %}
+                      <div class="form-check">
+                          <input type="checkbox" id="" name="{{ option_name }}" value=".{{ filter_group.name }}-{{ option_name }}" data-filter=".{{ option_name }}">
+                          <label>{{ option.name }}</label>
+                      </div>
                     {% endfor %}
                 </form>
             </div>
@@ -102,18 +103,28 @@
     <div class="gallery__img-container"> <!-- GALLERY IMAGE GRID -->
       <div class="gallery__img gallery__img-grid">       
         <!-- REPEATED CARD -->
-        {% for row in hubdb_table_rows(table_id, 'is_cover__eq=1') %}
-        <div id="{{row.unique_id}}" class="gallery__img--card {{row.solutions.name | replace(' ','-')}} {{row.kitchen_design_style.name | replace('/', '-')}} {{row.cabinet_color_family.name | replace(' ', '-')}} {{row.cabinet_style.name | replace('/','-') | replace(' ', '-')}}  {{row.cabinet_material.name}} {{row.countertop_material.name}} {{row.countertop_color.name}} {{row.backsplash_material.name}}" data-popular-sort="{{row.most_popular_sort}}" data-arrival-sort="{{row.new_arrival_sort}}" data-collection-name="{{row.kitchen_number}}" data-rel="{{row.kitchen_number}}">
-          <div class="gallery__img--background" style="background-image: url({{ row.image_url }});">
+        {% set images = hubdb_table_rows(table_id, 'is_cover__eq=1') %}
+        {% for image in images %}
+        <div id="{{image.unique_id}}" class="gallery__img--card  
+          kitchen_design_style-{{image.kitchen_design_style.name | replace('/', '-')}} 
+          cabinet_color_family-{{image.cabinet_color_family.name | replace(' ', '-')}} 
+          cabinet_style-{{image.cabinet_style.name | replace('/','-') | replace(' ', '-')}}  
+          cabinet_material-{{image.cabinet_material.name}} 
+          countertop_material-{{image.countertop_material.name}} 
+          countertop_color-{{image.countertop_color.name}} 
+          backsplash_material-{{image.backsplash_material.name}}" 
+        data-popular-sort="{{image.most_popular_sort}}" data-arrival-sort="{{image.new_arrival_sort}}" data-collection-name="{{image.kitchen_number}}" data-rel="{{image.kitchen_number}}">
+          <div class="gallery__img--background" style="background-image: url({{ image.image_url }});">
             <div class="gallery__img--background-overlay">
               <span><i class="fa fa-search" aria-hidden="true"></i></span>
             </div>
           </div>
           <div class="gallery__img--body">
             <ul class="gallery__img--props">
-              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/cabinet-icon.svg">{{row.cabinet_style.name}}</li>
-              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/countertop-icon.svg">{{row.countertop_material.name}}</li>
-              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/service-icon.svg">{{row.solutions.name}}</li>
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/cabinet-icon.svg">{{image.cabinet_style.name}}</li>
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/countertop-icon.svg">{{image.countertop_material.name}}</li>
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/service-icon.svg">{{image.solutions.name}}</li>
+              <li></li>
             </ul>
           </div>
         </div>
