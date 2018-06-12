@@ -43,13 +43,13 @@
     <div class="gallery__filter"><!-- FILTER LIST -->
 
       {% set filter_groups = [
-        {name:'kitchen_design_style',label:'Kitchen Design Styles'},
-        {name:'cabinet_color_family',label:'Color Family'},
-        {name:'cabinet_style',label:'Cabinet Styles'},
-        {name:'cabinet_material',label:'Cabinet Material'},
-        {name:'countertop_material',label:'Countertop Material'},
-        {name:'countertop_color',label:'Countertop Color'},
-        {name:'backsplash_material',label:'Backsplash Material'}
+        {name:'kitchen_design_style',label:'Kitchen Design Styles', databaseName: 'kitchen-design-style'},
+        {name:'cabinet_color_family',label:'Color Family', databaseName: 'cabinet-color-family'},
+        {name:'cabinet_style',label:'Cabinet Styles, databaseName: 'cabinet-style'},
+        {name:'cabinet_material',label:'Cabinet Material', databaseName: 'cabinet-material'},
+        {name:'countertop_material',label:'Countertop Material', databaseName: 'countertop-material'},
+        {name:'countertop_color',label:'Countertop Color', databaseName: 'countertop-color'},
+        {name:'backsplash_material',label:'Backsplash Material', databaseName: 'backsplash-material'}
       ] %}
       
         {% for filter_group in filter_groups %}
