@@ -1,0 +1,132 @@
+<!-----------
+  DEPENDENCIES
+  isotope.js
+	modulo.js
+	modulobox.css
+  magnific-popup.css
+---------------->
+{% set table_id='844364' %}
+
+<div class="gallery" id="km-gallery">
+  <div class="row-fluid">
+    <!-- TOP BAR -->
+    <div class="gallery__action-bar">
+      <!-- FILTER CLEAR -->
+      <div class="large-3 columns">
+          <div class="gallery__action-bar-left">Filter by:
+            <a href="JavaScript:void(0);" id="clear-filters">Clear all</a>
+          </div>
+      </div>
+      <!-- SPACER -->
+      <div class="large-1 columns"></div>
+      <!-- SORTS & SEARCH -->
+      <div class="large-8 columns">
+        <div class="gallery__action-bar-right">
+          <form id="sort-by">
+            <select name="sort-by">
+              <option value="popular">Most Popular</option>
+              <option value="arrival">Most Recent</option>
+            </select>
+          </form>
+          <form id="search-bar" action="javascript:void(0);">
+            <input id="gallery-filter-search" type="text" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+      <!-- END TOP BAR -->
+  </div>
+  
+  <div class="row-fluid">
+    
+    <!-- SIDEBAR FILTERS -->
+    <div class="gallery__filter"><!-- FILTER LIST -->
+
+      {% set filter_groups = [
+        {name:'solutions',label:'Solutions'},
+        {name:'kitchen_design_style',label:'Kitchen Design Styles'},
+        {name:'cabinet_color_family',label:'Color Family'},
+        {name:'cabinet_style',label:'Cabinet Styles'},
+        {name:'cabinet_material',label:'Cabinet Material'},
+        {name:'countertop_material',label:'Countertop Material'},
+        {name:'countertop_color',label:'Countertop Color'},
+        {name:'backsplash_material',label:'Backsplash Material'}
+      ] %}
+      
+        {% for filter_group in filter_groups %}
+        <div class="gallery__filter-card">
+            <div class="gallery__filter-card--header">{{filter_group.label}}
+                <span class="gallery__filter-card--dropdown">
+                    <i class="fa fa-chevron-down"></i>
+                </span>
+            </div>
+            <div class="gallery__filter-card--body">
+                <form class="gallery__filter-card-checkbox">
+                    {% for filter in hubdb_table_column(table_id, filter_group.name).options %}
+                    {% set name = filter.name | replace('/','-') | replace(' ', '-')  %}
+                    <div class="form-check">
+                        <input type="checkbox" id="" name="{{ name }}" value=".{{ name }}" data-filter=".{{ name }}">
+                        <label>{{ filter.name }}</label>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+      
+      <!-- POPUP ESTIMATE REQUEST BUTTON/FORM -->
+      <div id="gallery-popup" class="white-popup mfp-hide mfp-with-anim">
+        <center>
+        <!--[if lte IE 8]>
+        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
+        <![endif]-->
+        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+        <script>
+          hbspt.forms.create({ 
+            css: '',
+            portalId: '126868',
+            formId: '3ecb0607-1bfe-4310-8a84-dfb681c7ae92'
+          });
+        </script>
+        </center>
+      </div>
+      <br>
+      <a href="#gallery-popup" class="km-button popup-btn km-btn-info hide-for-small-only">
+        Schedule a Free Estimate
+      </a>
+     <!-- END POPUP ESTIMATE REQUEST BUTTON/FORM -->
+
+    </div><!-- END FILTER LIST -->
+    
+    
+
+    <div class="gallery__img-container"> <!-- GALLERY IMAGE GRID -->
+      <div class="gallery__img gallery__img-grid">       
+        <!-- REPEATED CARD -->
+        {% for row in hubdb_table_rows(table_id, 'is_cover__eq=1') %}
+        <div id="{{row.unique_id}}" class="gallery__img--card {{row.solutions.name | replace(' ','-')}} {{row.kitchen_design_style.name | replace('/', '-')}} {{row.cabinet_color_family.name | replace(' ', '-')}} {{row.cabinet_style.name | replace('/','-') | replace(' ', '-')}}  {{row.cabinet_material.name}} {{row.countertop_material.name}} {{row.countertop_color.name}} {{row.backsplash_material.name}}" data-popular-sort="{{row.most_popular_sort}}" data-arrival-sort="{{row.new_arrival_sort}}" data-collection-name="{{row.kitchen_number}}" data-rel="{{row.kitchen_number}}">
+          <div class="gallery__img--background" style="background-image: url({{ row.image_url }});">
+            <div class="gallery__img--background-overlay">
+              <span><i class="fa fa-search" aria-hidden="true"></i></span>
+            </div>
+          </div>
+          <div class="gallery__img--body">
+            <ul class="gallery__img--props">
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/cabinet-icon.svg">{{row.cabinet_style.name}}</li>
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/countertop-icon.svg">{{row.countertop_material.name}}</li>
+              <li><img src="https://www.kitchenmagic.com/hubfs/graphics/icons/service-icon.svg">{{row.solutions.name}}</li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
+        <!-- END REPEAT -->
+      </div>
+    </div><!-- END GALLERY IMAGE GRID -->
+    
+    <div id="gallery-viewer" data-rel="kitchens"></div>
+    
+  </div>
+</div>
+
+<!-- DEV REQUIREMENTS -->
+<!-- <link rel="stylesheet" href="https://cdn2.hubspot.net/hub/-1/hub_generated/template_assets/1495141902003/hubspot_default/shared/responsive/layout.min.css">        
+         -->
