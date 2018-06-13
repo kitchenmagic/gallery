@@ -82,9 +82,9 @@ getCollection: function(collectionId){
 
 // View
 function GalleryView(model, containerSelector){
-this.model = model;
-this.containerSelector = containerSelector;
-this.init();
+    this.model = model;
+    this.containerSelector = containerSelector;
+    this.init();
 }
 GalleryView.prototype = {
 init: function() {
@@ -114,9 +114,9 @@ getChildren: function(){
 //     }        
 // },
 
-getfilterCheckboxInputs: function(){
-    return this.filterCheckboxInputs;
-}
+    getfilterCheckboxInputs: function(){
+        return this.filterCheckboxInputs;
+    }
 };
 
 
