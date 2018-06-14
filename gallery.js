@@ -7,9 +7,9 @@ $('a.popup-btn').magnificPopup({
 
 // START APP
 function GalleryModel(){
-this.imageList = [];
-this.collectionList = [];
-this.selectedCollection = [];
+    this.imageList = [];
+    this.collectionList = [];
+    this.selectedCollection = [];
 }
 
 GalleryModel.prototype = {
@@ -89,6 +89,7 @@ function GalleryView(model, containerSelector){
 GalleryView.prototype = {
 init: function() {
     this.getChildren().$selectInputs.niceSelect();
+    // this.addButton();
 },
 
 getChildren: function(){
@@ -116,7 +117,14 @@ getChildren: function(){
 
     getfilterCheckboxInputs: function(){
         return this.filterCheckboxInputs;
+    },
+
+    addButton: function() {
+        var mbTopBar = $('body div.mobx-holder div.mobx-ui div.mobx-top-bar');
+        console.log('addbutton:', mbTopBar.selector);
+        $(mbTopBar.selector).append('<p>Test</p>');
     }
+
 };
 
 
@@ -279,9 +287,9 @@ viewer: {
 };
 
 function GalleryApp(selector){
-this.model = new GalleryModel(),
-this.view = new GalleryView(this.model, selector),
-this.controller = new GalleryController(this.model, this.view);
+    this.model = new GalleryModel(),
+    this.view = new GalleryView(this.model, selector),
+    this.controller = new GalleryController(this.model, this.view);
 }
 
 (function(){
