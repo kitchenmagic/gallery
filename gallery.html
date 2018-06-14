@@ -64,9 +64,9 @@
                   {% set options = hubdb_table_column(table_id, filter_group.name).options %}
                     {% for option in options %}
                       {% set option_name = option.name | replace('/','-') | replace(' ', '-')  %}
-                      <div class="form-check">
-                          <input type="checkbox" id="" name="{{ option_name }}" value=".{{ filter_group.name }}-{{ option_name }}" data-filter=".{{ option_name }}">
-                          <label>{{ option.name }}</label>
+                      <div class="form-check gtm-gallery-filter" data-gtm-info="{{ filter_group.name }}-{{ option_name }}">
+                          <input class="gtm-gallery-filter" type="checkbox" id="{{ filter_group.name }}-{{ option_name }}" name="{{ option_name }}" value=".{{ filter_group.name }}-{{ option_name }}" data-filter=".{{ option_name }}" data-gtm-info="{{ filter_group.name }}-{{ option_name }}">
+                          <label class="gtm-gallery-filter" data-gtm-info="{{ filter_group.name }}-{{ option_name }}">{{ option.name }}</label>
                       </div>
                     {% endfor %}
                 </form>
