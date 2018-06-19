@@ -88,6 +88,7 @@
 // Variables 
 $border-color: #DFEAEE;
 $red:		       #F01834;
+$dark-red:     #C30019;
 
 
 /* ============================================================
@@ -359,12 +360,45 @@ $red:		       #F01834;
 		// 	transform: scale3d(1, 1, 1);
 		// 	opacity: 1;
 		// }
-	}
+  }
 
+  /* testing image crop with img */
+
+  // .crop {
+  //   position: relative;
+  //   overflow: hidden;
+  //   /* Width and height can be anything. */
+  //   width: 31vw;
+  //   height: 25vh;
+  //   display:inline-block;
+  //   margin:0;
+  //   padding:0;
+  //   box-sizing:border-box;
+
+  //   img {
+  //     position: absolute;
+  //     /* Position the image in the middle of its container. */
+  //     top: -9999px;
+  //     right: -9999px;
+  //     bottom: -9999px;
+  //     left: -9999px;
+  //     margin: auto;
+  //     /* The following values determine the exact image behaviour. */
+  //     /* You can simulate background-size: cover/contain/etc.
+  //        by changing between min/max/standard width/height values.
+  //        These values simulate background-size: cover
+  //     */
+  //     min-width: 100%;
+  //     min-height: 100%;
+  //     box-sizing:border-box;
+  //   }
+
+  // }
+    
 	.gallery__img--background {
 		background-size: cover;
-		height: 210px;
-
+    height: 210px;
+    
     .gallery__img--background-overlay {
       transition: 400ms ease;
       opacity: 0;
@@ -599,6 +633,32 @@ $arrow_color: $gray !default;
 }
 
 .mobx-ui {
+
+  a.km-mobx-button {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
+    border: 0;
+    outline: 0;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    height: 32px;
+    line-height: 32px;
+    background: $red;
+    color: #fff;
+    opacity: 1;
+    @include transition;
+    float: right; 
+    margin: 7px 2px 2px;
+    padding: 0 10px;
+
+    &:hover {
+      background: $dark-red;
+    }
+  }
 
   button {
     &:hover, &:focus, &:active {
